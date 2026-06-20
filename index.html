@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================
+       META & SEO
+       ============================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Primary SEO -->
+  <title>Sahil Ahamed — Video Editor, Cinematographer & AI Creator</title>
+  <meta name="description" content="Sahil Ahamed is a professional video editor, cinematographer, and AI video creator specializing in short-form Reels, brand films, and cutting-edge AI-enhanced content. Currently crafting visuals at VRISM.">
+  <meta name="keywords" content="video editor, cinematographer, AI video creator, Reels editor, short-form content, brand films, Sahil Ahamed, VRISM, video editing portfolio">
+  <meta name="author" content="Sahil Ahamed">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#050508">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sahilahamed.com/">
+  <meta property="og:title" content="Sahil Ahamed — Video Editor, Cinematographer & AI Creator">
+  <meta property="og:description" content="Crafting visual stories that stop the scroll. Professional video editing, cinematography, and AI-powered content creation.">
+  <meta property="og:image" content="https://sahilahamed.com/static/images/og-image.jpg">
+  <meta property="og:site_name" content="Sahil Ahamed Portfolio">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://sahilahamed.com/">
+  <meta name="twitter:title" content="Sahil Ahamed — Video Editor, Cinematographer & AI Creator">
+  <meta name="twitter:description" content="Crafting visual stories that stop the scroll. Professional video editing, cinematography, and AI-powered content creation.">
+  <meta name="twitter:image" content="https://sahilahamed.com/static/images/og-image.jpg">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://sahilahamed.com/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/static/images/favicon.png">
+  <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+
+  <!-- ============================================
+       FONTS — Preconnect & Google Fonts
+       ============================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400;500&family=Italiana&display=swap" rel="stylesheet">
+
+  <!-- ============================================
+       STYLESHEET
+       ============================================ -->
+  <link rel="stylesheet" href="/static/css/style.css?v=1.5">
+</head>
+
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ============================================
+       LOADER
+       Displays monogram + progress bar while
+       assets load, then fades out via JS.
+       ============================================ -->
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader__monogram">SA</div>
+    <div class="loader__bar">
+      <div class="loader__progress"></div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       CUSTOM CURSOR (desktop only)
+       Follows mouse pointer with a smooth trail.
+       Hidden on touch devices via CSS/JS.
+       ============================================ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- ============================================
+       NAVIGATION
+       Fixed navbar with logo, links, and
+       hamburger menu for mobile.
+       ============================================ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__container">
+      <a href="#hero" class="navbar__logo" aria-label="Sahil Ahamed — Home">SA</a>
+
+      <div class="navbar__links" id="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#portfolio" class="nav-link">Work</a>
+        <a href="#photography" class="nav-link">Photography</a>
+        <a href="#thumbnails" class="nav-link">Thumbnails</a>
+        <a href="#ai-video" class="nav-link">AI Video</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#contact" class="nav-link nav-link--cta">Contact</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       Full-viewport hero with Three.js canvas
+       background, typed subtitle animation,
+       and dual CTAs.
+       ============================================ -->
+  <section id="hero" class="hero" aria-label="Hero introduction">
+    <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+
+    <div class="hero__content">
+      <p class="hero__label">VIDEO EDITOR &nbsp;•&nbsp; CINEMATOGRAPHER &nbsp;•&nbsp; AI CREATOR</p>
+
+      <h1 class="hero__title">
+        <span class="hero__title-solid">Sahil</span><br>
+        <span class="hero__title-outline">Ahamed</span>
+      </h1>
+      <div class="hero__subtitle">
+        <span class="hero__subtitle-static">I am a </span>
+        <span class="hero__subtitle-dynamic" id="hero-typed"></span>
+        <span class="hero__cursor">|</span>
+      </div>
+
+      <p class="hero__tagline">Crafting Visual Stories That Stop the Scroll</p>
+
+      <div class="hero__ctas">
+        <a href="#portfolio" class="cta-btn cta-btn--primary">View My Work</a>
+        <a href="#contact" class="cta-btn cta-btn--secondary">Let's Connect</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll-indicator" aria-hidden="true"></div>
+
+  </section>
+
+  <!-- ============================================
+       ABOUT SECTION
+       Bio, skill pills, and animated stats.
+       ============================================ -->
+  <section id="about" class="about section" aria-label="About Sahil Ahamed">
+    <div class="section-inner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <p class="section__label">ABOUT</p>
+          <h2 class="section__title">The Vision Behind<br>the Visuals</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="about__grid">
+          <!-- Profile Image -->
+          <div class="about__image-wrapper">
+            <div class="about__image">
+              <img src="/static/images/profile/ss.jpeg" alt="Sahil Ahamed">
+              <div class="about__image-glow"></div>
+            </div>
+          </div>
+
+          <!-- Bio Content -->
+          <div class="about__content">
+            <p class="about__bio">
+              Currently crafting visuals at <span class="text-highlight">VRISM</span>, Sahil Ahamed is a video editor, photographer, and AI video creator specializing in short-form content that captivates audiences and drives engagement. From trending Reels to long-form brand films, his work blends cinematic storytelling with cutting-edge AI innovation.
+            </p>
+
+            <!-- Skill Pills -->
+            <div class="about__skills" aria-label="Skills">
+              <a href="#portfolio" class="skill-pill" data-category="all">Reels &amp; Shorts</a>
+              <a href="#portfolio" class="skill-pill" data-category="long_form">Long-Form Editing</a>
+              <a href="#photography" class="skill-pill">Photography</a>
+              <a href="#portfolio" class="skill-pill" data-category="all">Videography</a>
+              <a href="#ai-video" class="skill-pill">AI Video</a>
+              <a href="#thumbnails" class="skill-pill">Thumbnail Design</a>
+            </div>
+
+            <!-- Stats — Numbers animate on scroll via JS -->
+            <div class="about__stats" aria-label="Statistics">
+              <div class="stat-item">
+                <span class="stat-number" data-target="50">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label">Clients</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label">Videos Edited</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label">Niches</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" data-target="3">0</span><span class="stat-suffix">M+</span>
+                <span class="stat-label">Views Generated</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SERVICES SECTION
+       Six glass-morphism cards with inline SVG
+       icons covering all offered services.
+       ============================================ -->
+  <section id="services" class="services section" aria-label="Services offered">
+    <div class="section-inner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <p class="section__label">WHAT I DO</p>
+          <h2 class="section__title">Services</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="services__grid">
+          <!-- Service 1: Reels & Shorts -->
+          <a href="#portfolio" class="service-card glass-card" data-category="all">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="2"/>
+                <polygon points="10,8 16,12 10,16"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Reels &amp; Shorts Editing</h3>
+            <p class="service-card__desc">Trending, hook-driven edits for every niche — doctors, creators, brands, and beyond.</p>
+          </a>
+
+          <!-- Service 2: Long-Form -->
+          <a href="#portfolio" class="service-card glass-card" data-category="long_form">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 8V4h16v4M4 16v4h16v-4M2 12h20"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Long-Form Video Editing</h3>
+            <p class="service-card__desc">YouTube videos, brand films, documentaries — expertly paced and color-graded.</p>
+          </a>
+
+          <!-- Service 3: Photography -->
+          <a href="#photography" class="service-card glass-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Photography</h3>
+            <p class="service-card__desc">On-site professional shoots — products, portraits, events, and brand imagery.</p>
+          </a>
+
+          <!-- Service 4: Videography -->
+          <a href="#portfolio" class="service-card glass-card" data-category="all">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M23 7l-7 5 7 5V7z"/>
+                <rect x="1" y="5" width="15" height="14" rx="2"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Videography</h3>
+            <p class="service-card__desc">Raw footage capture with cinematic flair — bringing stories to life on set.</p>
+          </a>
+
+          <!-- Service 5: AI Video -->
+          <a href="#ai-video" class="service-card glass-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-2 5h-4c0-2-2-3-2-5a4 4 0 0 1 4-4z"/>
+                <path d="M10 17h4M10 21h4M10 13h4"/>
+                <circle cx="12" cy="6" r="1"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">AI Video Creation</h3>
+            <p class="service-card__desc">Next-gen AI content meets human creativity — the future of visual storytelling.</p>
+          </a>
+
+          <!-- Service 6: Thumbnails -->
+          <a href="#thumbnails" class="service-card glass-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 9h18M9 3v18"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Thumbnail Design</h3>
+            <p class="service-card__desc">Click-worthy visual first impressions — bold, high-contrast, scroll-stopping.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PORTFOLIO SECTION
+       Filterable grid populated dynamically by
+       portfolio.js. Filter tabs use data-category
+       attributes for JS-based filtering.
+       ============================================ -->
+  <section id="portfolio" class="portfolio section" aria-label="Portfolio work">
+    <div class="section-inner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <p class="section__label">THE WORK</p>
+          <h2 class="section__title">Portfolio</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="portfolio__filters" id="filter-tabs" role="tablist" aria-label="Portfolio filter categories">
+          <button class="filter-tab active" data-category="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-tab" data-category="doctors" role="tab" aria-selected="false">Doctors</button>
+          <button class="filter-tab" data-category="entrepreneurs" role="tab" aria-selected="false">Entrepreneurs</button>
+          <button class="filter-tab" data-category="content_creators" role="tab" aria-selected="false">Content Creators</button>
+          <button class="filter-tab" data-category="retail_shops" role="tab" aria-selected="false">Retail Shops</button>
+          <button class="filter-tab" data-category="long_form" role="tab" aria-selected="false">Long Form</button>
+        </div>
+
+        <!-- Portfolio Grid — Populated by portfolio.js -->
+        <div class="portfolio__grid" id="portfolio-grid" role="tabpanel">
+          <!-- Dynamically populated by portfolio.js -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="portfolio__empty" id="portfolio-empty" style="display:none;">
+          <div class="portfolio__empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <rect x="2" y="2" width="20" height="20" rx="2"/>
+              <polygon points="10,8 16,12 10,16"/>
+            </svg>
+          </div>
+          <p>Videos coming soon — check back for fresh edits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PHOTOGRAPHY SECTION
+       Dedicated masonry grid loading photography
+       files from API.
+       ============================================ -->
+  <section id="photography" class="photography section" aria-label="Photography work">
+    <div class="section-inner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <p class="section__label">STILL FRAMES</p>
+          <h2 class="section__title">Photography</h2>
+          <div class="section-divider"></div>
+        </div>
+        <!-- Masonry Grid -->
+        <div class="photography__grid" id="photography-grid">
+          <!-- Loaded via JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       THUMBNAILS SECTION
+       Dedicated 16:9 responsive grid loading
+       thumbnail files from API.
+       ============================================ -->
+  <section id="thumbnails" class="thumbnails section" aria-label="Thumbnail designs">
+    <div class="section-inner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <p class="section__label">FIRST IMPRESSIONS</p>
+          <h2 class="section__title">Thumbnail Design</h2>
+          <div class="section-divider"></div>
+        </div>
+        <!-- Grid -->
+        <div class="thumbnails__grid" id="thumbnails-grid">
+          <!-- Loaded via JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       LIGHTBOX MODAL
+       Fullscreen overlay for viewing portfolio
+       videos and images with prev/next navigation.
+       ============================================ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Portfolio lightbox" aria-hidden="true">
+    <div class="lightbox__header">
+      <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close lightbox">&#10005; CLOSE</button>
+      <div class="lightbox__nav-group">
+        <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous item">&#9664; PREV</button>
+        <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next item">NEXT &#9654;</button>
+      </div>
+    </div>
+    <div class="lightbox__content">
+      <div class="lightbox__skeleton skeleton" id="lightbox-skeleton" style="display: none;"></div>
+      <video class="lightbox__video" id="lightbox-video" playsinline></video>
+      <img class="lightbox__image" id="lightbox-image" style="display:none;" alt="Portfolio item">
+    </div>
+    <div class="lightbox__footer">
+      <div class="lightbox__controls">
+        <button class="lightbox__btn lightbox__sound" id="lightbox-sound" aria-label="Toggle sound">&#128266; Sound ON</button>
+        <button class="lightbox__btn lightbox__fullscreen" id="lightbox-fullscreen" aria-label="Toggle fullscreen">&#9638; FULLSCREEN</button>
+        <button class="lightbox__btn lightbox__share" id="lightbox-share" aria-label="Share item">&#8595; SHARE</button>
+      </div>
+      <div class="lightbox__category" id="lightbox-category">Category: Reel</div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       AI VIDEO SECTION
+       Showcases AI + human creativity workflow
+       with before/after comparison and feature
+       highlights.
+       ============================================ -->
+  <section id="ai-video" class="ai-section section" aria-label="AI video creation">
+    <div class="section-inner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <p class="section__label">THE FUTURE</p>
+          <h2 class="section__title">AI + Human Creativity</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <p class="ai-section__intro">At the intersection of artificial intelligence and human artistry lies the next evolution of content creation. Sahil merges cutting-edge AI video generation tools with years of editing expertise to deliver outputs that were impossible just a year ago.</p>
+
+        <!-- Before / After Comparison -->
+        <div class="ai-section__comparison">
+
+          <div class="ai-section__before glass-card">
+            <div class="ai-section__label">AI Generated Raw</div>
+            <div class="ai-section__preview">
+              <div class="ai-section__placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-2 5h-4c0-2-2-3-2-5a4 4 0 0 1 4-4z"/>
+                  <path d="M10 17h4M10 21h4M10 13h4"/>
+                </svg>
+                <span>AI Raw Output</span>
+              </div>
+            </div>
+            <ul class="ai-section__list">
+              <li><span class="ai-list-icon ai-list-icon--cross">❌</span> Unstable character consistency</li>
+              <li><span class="ai-list-icon ai-list-icon--cross">❌</span> Lack of cinematic pacing &amp; logic</li>
+              <li><span class="ai-list-icon ai-list-icon--cross">❌</span> Flat, ungraded raw colors</li>
+            </ul>
+          </div>
+
+          <div class="ai-section__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+
+          <div class="ai-section__after glass-card">
+            <div class="ai-section__label">Sahil's Edited Final</div>
+            <div class="ai-section__preview">
+              <div class="ai-section__placeholder ai-section__placeholder--final">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <polygon points="5,3 19,12 5,21"/>
+                </svg>
+                <span>Polished Final Cut</span>
+              </div>
+            </div>
+            <ul class="ai-section__list">
+              <li><span class="ai-list-icon ai-list-icon--check">✔️</span> Dynamic speed ramping &amp; transitions</li>
+              <li><span class="ai-list-icon ai-list-icon--check">✔️</span> Custom sound design &amp; Foley soundscapes</li>
+              <li><span class="ai-list-icon ai-list-icon--check">✔️</span> Cinematic color grading &amp; VFX polish</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- AI Feature Cards -->
+        <div class="ai-section__features">
+
+          <div class="ai-feature glass-card">
+            <h4>AI-Powered B-Roll</h4>
+            <p>Generate cinematic supplementary footage that perfectly matches your brand's tone.</p>
+          </div>
+
+          <div class="ai-feature glass-card">
+            <h4>Smart Color Grading</h4>
+            <p>AI-assisted color science for consistent, mood-perfect visuals across every frame.</p>
+          </div>
+
+          <div class="ai-feature glass-card">
+            <h4>Intelligent Editing</h4>
+            <p>AI identifies the best moments, suggests cuts, and accelerates the editing workflow.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PROCESS SECTION
+       Five-step creative timeline showing the
+       workflow from brief to final delivery.
+       ============================================ -->
+  <section id="process" class="process section" aria-label="Creative process">
+    <div class="section-inner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <p class="section__label">HOW I WORK</p>
+          <h2 class="section__title">The Process</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="process__timeline" id="process-timeline">
+
+          <div class="timeline-step">
+            <div class="timeline-step__number" aria-hidden="true">01</div>
+            <h3 class="timeline-step__title">Brief &amp; Discovery</h3>
+            <p class="timeline-step__desc">Understanding your goals, audience, and brand to craft the perfect creative direction.</p>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__number" aria-hidden="true">02</div>
+            <h3 class="timeline-step__title">Shoot &amp; Assets</h3>
+            <p class="timeline-step__desc">On-site photography and videography, or collecting your raw footage and assets.</p>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__number" aria-hidden="true">03</div>
+            <h3 class="timeline-step__title">Edit &amp; AI Magic</h3>
+            <p class="timeline-step__desc">Cutting, color grading, sound design, and integrating AI-powered enhancements.</p>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__number" aria-hidden="true">04</div>
+            <h3 class="timeline-step__title">Review &amp; Refine</h3>
+            <p class="timeline-step__desc">Your feedback matters — iterative revisions until every frame is perfect.</p>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__number" aria-hidden="true">05</div>
+            <h3 class="timeline-step__title">Final Delivery</h3>
+            <p class="timeline-step__desc">Optimized exports for every platform — Instagram, YouTube, TikTok, and beyond.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TESTIMONIALS SECTION
+       Infinite horizontal marquee of client
+       testimonials. Cards are duplicated to
+       create a seamless CSS scroll loop.
+       ============================================
+  <section id="testimonials" class="testimonials section" aria-label="Client testimonials">
+    <div class="section-inner">
+      <div class="container">
+        <p class="section__label">CLIENT LOVE</p>
+        <h2 class="section__title">Testimonials</h2>
+      </div>
+
+      <div class="testimonials__marquee" aria-label="Scrolling testimonials">
+        <div class="testimonials__track">
+          <div class="testimonial-card glass-card">
+            <p class="testimonial-card__text">&ldquo;Sahil transformed our clinic&rsquo;s social media presence. His Reels consistently get 10x more engagement than anything we&rsquo;d tried before. Absolute game-changer.&rdquo;</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true"></div>
+              <div>
+                <p class="testimonial-card__name">Dr. Arjun Mehta</p>
+                <p class="testimonial-card__role">Dermatologist</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card glass-card">
+            <p class="testimonial-card__text">&ldquo;Working with Sahil feels effortless. He understands trends before they blow up and my content has never looked more professional. Highly recommend!&rdquo;</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true"></div>
+              <div>
+                <p class="testimonial-card__name">Priya Sharma</p>
+                <p class="testimonial-card__role">Content Creator, 500K+ Followers</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card glass-card">
+            <p class="testimonial-card__text">&ldquo;Sahil&rsquo;s video editing for our product launches has been phenomenal. Sales went up 40% after we started using his Reels for our store promotions.&rdquo;</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true"></div>
+              <div>
+                <p class="testimonial-card__name">Rajesh Kumar</p>
+                <p class="testimonial-card__role">Entrepreneur, E-Commerce</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card glass-card">
+            <p class="testimonial-card__text">&ldquo;Our boutique&rsquo;s Instagram grew from 2K to 15K followers in 3 months, all thanks to Sahil&rsquo;s incredible edits. Every video he makes is a masterpiece.&rdquo;</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true"></div>
+              <div>
+                <p class="testimonial-card__name">Ananya Reddy</p>
+                <p class="testimonial-card__role">Owner, Luxe Boutique</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card glass-card">
+            <p class="testimonial-card__text">&ldquo;The transformation videos Sahil creates for our salon are incredible. Clients literally book appointments after seeing our Reels. Best investment we&rsquo;ve made.&rdquo;</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true"></div>
+              <div>
+                <p class="testimonial-card__name">Meera Nair</p>
+                <p class="testimonial-card__role">Owner, Glow Beauty Studio</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- ============================================
+       CONTACT SECTION
+       Contact form with service dropdown and
+       info sidebar with email, Instagram, and
+       WhatsApp links.
+       ============================================ -->
+  <section id="contact" class="contact section" aria-label="Contact form">
+    <div class="section-inner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">08</span>
+          <p class="section__label">GET IN TOUCH</p>
+          <h2 class="section__title">Let's Create<br>Something</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="contact__grid">
+
+          <!-- Contact Form -->
+          <form class="contact__form" id="contact-form" method="POST" novalidate>
+            <div class="form-overlay" id="form-overlay" aria-hidden="true">
+              <div class="form-overlay__content">
+                <div class="form-overlay__spinner"></div>
+                <p>Sending your message...</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-name" class="form-label">Full Name</label>
+              <input type="text" id="contact-name" name="name" class="form-input" placeholder="Your full name" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email" class="form-label">Email Address</label>
+              <input type="email" id="contact-email" name="email" class="form-input" placeholder="your@email.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label for="contact-service" class="form-label">Service Needed</label>
+              <select id="contact-service" name="service" class="form-select" required>
+                <option value="" disabled selected>Select a service</option>
+                <option value="Reels Editing">Reels &amp; Shorts Editing</option>
+                <option value="Long Form Editing">Long-Form Video Editing</option>
+                <option value="Photography">Photography</option>
+                <option value="Videography">Videography</option>
+                <option value="AI Video">AI Video Creation</option>
+                <option value="Thumbnail Design">Thumbnail Design</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-brief" class="form-label">Project Brief</label>
+              <textarea id="contact-brief" name="brief" class="form-textarea" placeholder="Tell me about your project..." rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn cta-btn cta-btn--primary">
+              <span class="btn-text">Send Message</span>
+              <span class="spinner" aria-hidden="true"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+              </svg>
+            </button>
+
+            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+          </form>
+
+          <!-- Contact Info Sidebar -->
+          <div class="contact__info">
+            <div class="contact__info-card glass-card">
+              <h3>Let's talk</h3>
+              <p>Have a project in mind? Drop me a message and I'll get back to you within 24 hours.</p>
+
+              <div class="contact__links">
+                <a href="https://mail.google.com/mail/?view=cm&to=sahilkutty92@gmail.com" target="_blank" rel="noopener noreferrer" class="contact__link gmail-link">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M22 4l-10 8L2 4"/>
+                  </svg>
+                  <span class="gmail-wrapper">
+                    <span class="gmail-text">sahilkutty92@gmail.com</span><span class="external-icon">↗</span>
+                  </span>
+                </a>
+
+                <a href="https://instagram.com/@__.shxhil__" target="_blank" rel="noopener noreferrer" class="contact__link">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5"/>
+                    <circle cx="12" cy="12" r="5"/>
+                    <circle cx="17.5" cy="6.5" r="1.5"/>
+                  </svg>
+                  <span>@__.shxhil__</span>
+                </a>
+
+                <a href="https://wa.me/918122915414" target="_blank" rel="noopener noreferrer" class="contact__link">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg>
+                  <span>+91 81229 15414</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       Tagline, social links, and copyright.
+       ============================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__content">
+
+        <p class="footer__tagline">Edited with Vision. Delivered with Purpose.</p>
+
+        <!-- Social Links -->
+        <div class="footer__social">
+          <a href="https://instagram.com/@__.shxhil__" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="5"/>
+              <circle cx="17.5" cy="6.5" r="1.5"/>
+            </svg>
+          </a>
+
+          <a href="https://youtube.com/@kattradhucinema8288?si=GAgDV6g0xssbIweK" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.13C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z"/>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+            </svg>
+          </a>
+
+          <a href="https://wa.me/918122915414" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </a>
+        </div>
+
+        <p class="footer__copyright">&copy; 2025 Sahil Ahamed — All Rights Reserved</p>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       POPUP & TOAST NOTIFICATIONS
+       ============================================ -->
+  <div class="popup-overlay" id="success-popup" aria-hidden="true">
+    <div class="popup-card glass-card">
+      <div class="success-icon">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+      </div>
+      <h3 class="popup-title">MESSAGE SENT!</h3>
+      <p class="popup-message">Thank you, <span id="success-name"></span>! Sahil will get back to you within 24 hours.</p>
+      <button class="popup-close cta-btn cta-btn--primary" id="success-close">CLOSE</button>
+    </div>
+  </div>
+
+  <div class="error-toast" id="error-toast" aria-live="assertive" role="alert">
+    <span class="toast-icon">⚠</span>
+    <span class="toast-message">Failed to send. Please try again.</span>
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       Three.js for hero canvas, GSAP for scroll
+       animations, then custom modules.
+       ============================================ -->
+  <!-- Vendor libs served locally — no CDN round-trip on refresh -->
+  <script src="/static/js/vendor/three.min.js" defer></script>
+  <script src="/static/js/vendor/gsap.min.js" defer></script>
+  <script src="/static/js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="/static/js/main.js?v=1.2" defer></script>
+  <script src="/static/js/portfolio.js?v=1.4" defer></script>
+
+</body>
+</html>

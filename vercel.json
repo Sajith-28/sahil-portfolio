@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://sahilahamed-edits-backend.onrender.com/api/:path*"
+    }
+  ]
+}
