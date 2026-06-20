@@ -43,48 +43,129 @@
      1.  LOADING SCREEN ANIMATION
   ---------------------------------------------------------- */
 
-  const initLoader = () => {
-    const loader      = $('#loader');
-    const monogram    = $('.loader__monogram');
-    const progressBar = $('.loader__progress');
+    const initLoader = () => {
+    const loader = $('#cinematic-loader');
+    const burstCenter = $('.cl-burst-center');
+    const particleLayer = $('.cl-particle-layer');
+    const posterContainer = $('.cl-poster-container');
+    const posterImg = $('.cl-poster-img');
+    const progressFill = $('.cl-progress-fill');
 
     if (!loader) return Promise.resolve();
 
     return new Promise((resolve) => {
+      // Exit loader sequence
+      const exitLoader = () => {
+        const exitTl = gsap.timeline({
+          onComplete: () => {
+            loader.style.display = 'none';
+            resolve();
+          }
+        });
+
+        if (prefersReduced) {
+          exitTl.to(loader, { opacity: 0, duration: 0.5 });
+          return;
+        }
+
+        exitTl.to(posterContainer, { 
+          scale: 1.1, 
+          duration: 0.6, 
+          ease: "power2.in" 
+        }, 0)
+        .to(loader, {
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in"
+        }, 0.2);
+      };
+
       if (prefersReduced) {
-        // Instantly hide loader if reduced motion
-        loader.classList.add('loader--hidden');
-        resolve();
+        // Fallback for reduced motion
+        gsap.to(posterContainer, { opacity: 1, duration: 0.5 });
+        setTimeout(exitLoader, 1500); // Wait 1.5s then exit
         return;
       }
 
-      // Monogram fade-in
-      const tl = gsap.timeline({
-        onComplete: () => {
-          loader.classList.add('loader--hidden');
-          // Wait for CSS transition to finish before removing from flow
-          loader.addEventListener('transitionend', () => {
-            resolve();
-          }, { once: true });
+      // 4-Phase Cinematic Sequence
+      const tl = gsap.timeline();
+      
+      // Phase 1: Burst-in (0.0 - 0.5s)
+      tl.set(loader, { autoAlpha: 1 })
+        .set(burstCenter, { scale: 0, opacity: 1 })
+        .set(particleLayer, { scale: 0.8, opacity: 0 })
+        .set(posterContainer, { scale: 0.92, clipPath: "circle(0% at 50% 50%)" })
+        .set(progressFill, { scaleX: 0, transformOrigin: "left center" });
 
-          // Fallback in case transitionend doesn't fire
-          setTimeout(resolve, 800);
-        },
+      tl.to(burstCenter, {
+        scale: 4,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power3.out"
+      }, 0)
+      .to(particleLayer, {
+        scale: 1.5,
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out"
+      }, 0)
+      .to(particleLayer, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.in"
+      }, 0.3);
+
+      // Phase 2: Image Reveal (0.4s - 1.2s)
+      tl.to(posterContainer, {
+        clipPath: "circle(100% at 50% 50%)",
+        duration: 0.8,
+        ease: "power3.inOut"
+      }, 0.3)
+      .to(posterContainer, {
+        scale: 1,
+        duration: 1.0,
+        ease: "power2.out"
+      }, 0.3);
+
+      // Phase 3: Text/detail emphasis (1.0s - 1.8s)
+      tl.to(progressFill, {
+        scaleX: 1,
+        duration: 0.8,
+        ease: "power1.inOut"
+      }, 1.0);
+
+      // Phase 4: Wait for load or Timeout (max 2.5s)
+      let isLoaded = false;
+      const minDurationPassed = new Promise(res => setTimeout(res, 1800)); // Minimum display time
+      
+      const checkExit = () => {
+        if (isLoaded) {
+          exitLoader();
+        }
+      };
+
+      // When window loads or maximum 2.5s timeout reached
+      const timeoutFallback = setTimeout(() => {
+        isLoaded = true;
+        checkExit();
+      }, 2500);
+
+      window.addEventListener('load', () => {
+        minDurationPassed.then(() => {
+          isLoaded = true;
+          clearTimeout(timeoutFallback);
+          checkExit();
+        });
       });
-
-      tl.fromTo(
-        monogram,
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' }
-      );
-
-      tl.fromTo(
-        progressBar,
-        { scaleX: 0, transformOrigin: 'left center' },
-        { scaleX: 1, duration: 0.6, ease: 'power1.inOut' },
-        '-=0.2'
-      );
-
+      
+      // If it's already loaded
+      if (document.readyState === 'complete') {
+        minDurationPassed.then(() => {
+            isLoaded = true;
+            clearTimeout(timeoutFallback);
+            checkExit();
+        });
+      }
     });
   };
 
