@@ -81,8 +81,8 @@ async def get_all_videos() -> dict:
     metadata = _load_metadata()
     categories: dict[str, list[dict]] = {}
     for category in VALID_CATEGORIES:
-        folder = STATIC_DIR / "videos" / category
-        files = _scan_files(folder, VIDEO_EXTENSIONS)
+        cat_meta = metadata.get(category, {})
+        files = list(cat_meta.keys())
         categories[category] = _enrich_video_files(category, files, metadata)
     return {"categories": categories}
 
@@ -116,8 +116,8 @@ async def get_videos_by_category(category: str) -> dict:
         )
 
     metadata = _load_metadata()
-    folder = STATIC_DIR / "videos" / category
-    files = _scan_files(folder, VIDEO_EXTENSIONS)
+    cat_meta = metadata.get(category, {})
+    files = list(cat_meta.keys())
     return {
         "category": category,
         "files": _enrich_video_files(category, files, metadata)

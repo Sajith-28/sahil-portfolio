@@ -13,8 +13,3 @@ appDataDir/
 brain/
 *.log
 .env
-main.py
-requirements.txt
-Procfile
-render.yaml
-*.py
