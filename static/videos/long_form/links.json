@@ -1,0 +1,30 @@
+[
+  {
+    "id": "lv1",
+    "title": "Triglycerides: An Early Marker of Prediabetes",
+    "thumbnail": "video1_thumb.jpg",
+    "youtube_url": "https://www.youtube.com/watch?v=Ea1K2I6DE4Y",
+    "category": "long_form"
+  },
+  {
+    "id": "lv2",
+    "title": "Difficult to Fall Back Asleep?",
+    "thumbnail": "video2_thumb.jpg",
+    "youtube_url": "https://www.youtube.com/watch?v=sPZUXIWmBu0",
+    "category": "long_form"
+  },
+  {
+    "id": "lv3",
+    "title": "Functional Health Explained",
+    "thumbnail": "video3_thumb.jpg",
+    "youtube_url": "https://www.youtube.com/watch?v=yd3oZJK99MI",
+    "category": "long_form"
+  },
+  {
+    "id": "lv4",
+    "title": "Is Light a Medicine? How Sunlight Controls Your Sleep, Hormones & Metabolism",
+    "thumbnail": "video4_thumb.jpg",
+    "youtube_url": "https://www.youtube.com/watch?v=DCdn7xK5VRI",
+    "category": "long_form"
+  }
+]

@@ -1,0 +1,39 @@
+# Virtual Environment
+venv/
+.venv/
+ENV/
+
+# Python Cache & Logs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Environments and Secrets
+.env
+.env.*
+!.env.example
+
+# Large Backup & Archive Files
+*.zip
+*.tar
+*.gz
+*.rar
+video_backups/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Agent & Temp directories
+.agents/
+.gemini/
+scratch/
+.system_generated/
+appDataDir/
+brain/
+*.MOV
