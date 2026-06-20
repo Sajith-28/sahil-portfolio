@@ -103,17 +103,8 @@
         duration: 0.5,
         ease: "power3.out"
       }, 0)
-      .to(particleLayer, {
-        scale: 1.5,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out"
-      }, 0)
-      .to(particleLayer, {
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.in"
-      }, 0.3);
+      
+      ;
 
       // Phase 2: Image Reveal (0.4s - 1.2s)
       tl.to(posterContainer, {
