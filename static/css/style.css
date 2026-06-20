@@ -374,17 +374,20 @@ html {
 }
 
 .navbar__logo {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--color-purple-light), var(--color-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: opacity var(--transition-smooth);
   user-select: none;
+}
+
+.logo-image {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-purple-light);
+  box-shadow: 0 0 10px rgba(123, 44, 191, 0.4);
 }
 
 .navbar__logo:hover {

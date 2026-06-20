@@ -36,8 +36,11 @@
   <link rel="canonical" href="https://sahilahamed.com/">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
-  <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/apple-touch-icon.png">
+  <link rel="manifest" href="/static/site.webmanifest">
 
   <!-- ============================================
        FONTS — Preconnect & Google Fonts
@@ -82,7 +85,12 @@
        ============================================ -->
   <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="navbar__container">
-      <a href="#hero" class="navbar__logo" aria-label="Sahil Ahamed — Home">SA</a>
+      <a href="#hero" class="navbar__logo" aria-label="Sahil Ahamed — Home">
+        <picture>
+          <source srcset="/static/images/logo/logo-48.webp 1x, /static/images/logo/logo-96.webp 2x, /static/images/logo/logo-144.webp 3x" type="image/webp">
+          <img src="/static/images/logo/logo-48.png" srcset="/static/images/logo/logo-96.png 2x, /static/images/logo/logo-144.png 3x" alt="Sahil Ahamed" width="48" height="48" class="logo-image">
+        </picture>
+      </a>
 
       <div class="navbar__links" id="nav-links">
         <a href="#about" class="nav-link">About</a>
