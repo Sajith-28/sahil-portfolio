@@ -37,7 +37,11 @@ async def connect_db() -> None:
         return
 
     try:
-        database.client = AsyncIOMotorClient(MONGODB_URI)
+        database.client = AsyncIOMotorClient(
+            MONGODB_URI,
+            serverSelectionTimeoutMS=5000,
+            connectTimeoutMS=5000,
+        )
         database.db = database.client[DB_NAME]
         # Verify the connection is alive
         await database.client.admin.command("ping")
