@@ -41,6 +41,22 @@ MAIL_SERVER: str = (
 MAIL_PORT: int = int(os.getenv("MAIL_PORT") or os.getenv("SMTP_PORT") or "587")
 MAIL_FROM_NAME: str = os.getenv("MAIL_FROM_NAME", "Sahil Ahamed Portfolio")
 
+
+def _looks_like_placeholder(value: str) -> bool:
+    """Return True for unset/example credentials that should not trigger SMTP."""
+    normalized = value.strip().lower()
+    if not normalized:
+        return True
+    placeholder_fragments = (
+        "your_",
+        "your-",
+        "your.",
+        "example",
+        "placeholder",
+        "change-this",
+    )
+    return any(fragment in normalized for fragment in placeholder_fragments)
+
 # Setup fastapi-mail configuration
 conf = ConnectionConfig(
     MAIL_USERNAME=MAIL_USERNAME,
@@ -79,7 +95,7 @@ async def submit_contact(form: ContactForm) -> JSONResponse:
             )
 
     # 2. Check SMTP Settings
-    if not MAIL_USERNAME or not MAIL_PASSWORD or MAIL_PASSWORD == "your_16_character_app_password_here" or "your_username" in MAIL_USERNAME or MAIL_USERNAME == "your_email@gmail.com":
+    if _looks_like_placeholder(MAIL_USERNAME) or _looks_like_placeholder(MAIL_PASSWORD):
         print("[Warning] SMTP credentials are not configured or contain placeholders in .env - returning mock success response for frontend preview.")
         return JSONResponse(
             status_code=status.HTTP_200_OK,

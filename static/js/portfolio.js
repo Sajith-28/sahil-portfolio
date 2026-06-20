@@ -75,6 +75,7 @@ class PortfolioManager {
     this.currentFilter = 'all';
     this.lightboxItems = [];   // subset currently visible in lightbox (scoped)
     this.lightboxIndex = 0;
+    this.lastFocusedElement = null;
     this.observer = null;      // IntersectionObserver for lazy-load
 
     // --- Kick off ---
@@ -465,8 +466,12 @@ class PortfolioManager {
       tab.addEventListener('click', () => {
         if (tab.classList.contains('active')) return;
 
-        tabs.forEach((t) => t.classList.remove('active'));
+        tabs.forEach((t) => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
         tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
 
         // Scroll tab into view on mobile
         tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -681,6 +686,10 @@ class PortfolioManager {
   openLightbox(item, itemsList) {
     if (!this.lightbox) return;
 
+    this.lastFocusedElement = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+
     // Filter lightbox targets from the provided scope list (excluding placeholders and long-form)
     this.lightboxItems = (itemsList || this.items).filter((i) => {
       if (i.type === 'placeholder' || i.type === 'long_form') return false;
@@ -695,7 +704,11 @@ class PortfolioManager {
 
     // Activate lightbox overlay with GSAP animations
     this.lightbox.classList.add('active');
+    this.lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    if (this.lightboxClose) {
+      this.lightboxClose.focus({ preventScroll: true });
+    }
 
     gsap.killTweensOf(this.lightbox);
     gsap.killTweensOf('.lightbox__content');
@@ -828,6 +841,7 @@ class PortfolioManager {
       ease: 'power2.in',
       onComplete: () => {
         this.lightbox.classList.remove('active');
+        this.lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
 
         if (this.lightboxVideo) {
@@ -837,6 +851,11 @@ class PortfolioManager {
         if (this.lightboxImage) {
           this.lightboxImage.src = '';
         }
+
+        if (this.lastFocusedElement && document.contains(this.lastFocusedElement)) {
+          this.lastFocusedElement.focus({ preventScroll: true });
+        }
+        this.lastFocusedElement = null;
       }
     });
   }
@@ -872,6 +891,8 @@ class PortfolioManager {
   // 9. Mobile Touch / Swipe gestures detection
   // -------------------------------------------------------------------------
   setupSwipeDetection() {
+    if (!this.lightbox) return;
+
     let startX = 0;
     let endX = 0;
 

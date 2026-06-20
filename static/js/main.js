@@ -477,6 +477,13 @@
 
     if (!navbar) return;
 
+    const setMobileNavOpen = (isOpen) => {
+      if (!hamburger || !navLinks) return;
+      hamburger.classList.toggle('active', isOpen);
+      navLinks.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    };
+
     /* Scrolled state */
     const updateNavbar = () => {
       if (window.scrollY > 100) {
@@ -543,8 +550,7 @@
 
         // Close mobile nav if needed
         if (hamburger && navLinks && (link.classList.contains('nav-link') || link.closest('#nav-links') || link.closest('.navbar__links'))) {
-          hamburger.classList.remove('active');
-          navLinks.classList.remove('active');
+          setMobileNavOpen(false);
         }
       }
     };
@@ -571,9 +577,17 @@
     /* Hamburger toggle */
     if (hamburger && navLinks) {
       hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
+        setMobileNavOpen(!navLinks.classList.contains('active'));
       });
+
+      const closeNavOnEscape = (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+          setMobileNavOpen(false);
+          hamburger.focus({ preventScroll: true });
+        }
+      };
+      document.addEventListener('keydown', closeNavOnEscape);
+      cleanups.push(() => document.removeEventListener('keydown', closeNavOnEscape));
     }
   };
 

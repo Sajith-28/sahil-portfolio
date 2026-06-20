@@ -622,7 +622,7 @@ html {
   transform: translateY(20px);
 }
 
-.hero__cta {
+.hero__ctas {
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -637,8 +637,11 @@ html {
 .cta-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
   padding: 0.9rem 2.2rem;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 2px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -835,6 +838,12 @@ html {
 .about__image:hover {
   border-color: var(--glass-border-hover);
   box-shadow: 0 15px 45px rgba(58, 123, 213, 0.3);
+}
+
+.about__image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .about__image img {
@@ -1077,7 +1086,7 @@ html {
   background: transparent;
   border: none;
   padding: 0.8rem 1.4rem;
-  color: var(--text-muted);
+  color: #a2bad2;
   cursor: pointer;
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1086,12 +1095,11 @@ html {
   letter-spacing: 0.15em;
   transition: opacity 0.3s ease, color 0.3s ease;
   position: relative;
-  opacity: 0.5;
+  opacity: 1;
   white-space: nowrap;
 }
 
 .filter-tab:hover {
-  opacity: 0.8;
   color: var(--text-primary);
 }
 
@@ -1491,6 +1499,7 @@ html {
   justify-content: space-between;
   align-items: center;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s ease;
   backdrop-filter: blur(20px);
@@ -1500,6 +1509,7 @@ html {
 
 .lightbox.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: all;
 }
 
@@ -1516,6 +1526,8 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
   padding: 0.5rem 1rem;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 4px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -1526,7 +1538,13 @@ html {
   letter-spacing: 0.1em;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+}
+
+.lightbox__close-icon {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .lightbox__btn:hover {
@@ -1994,7 +2012,7 @@ html {
   height: 100%;
 }
 
-.ai-feature h4 {
+.ai-feature h3 {
   font-family: var(--font-accent);
   font-size: 1.1rem;
   font-weight: 400;
@@ -2821,26 +2839,32 @@ html {
     margin-bottom: 2rem;
   }
 
-  /* Lightbox nav */
-  .lightbox__prev {
-    left: 0.5rem;
+  /* Lightbox layout */
+  .lightbox {
+    padding: calc(env(safe-area-inset-top, 0px) + 1rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 1rem);
   }
 
-  .lightbox__next {
-    right: 0.5rem;
+  .lightbox__header {
+    gap: 0.75rem;
   }
 
-  .lightbox__nav {
-    width: 40px;
-    height: 40px;
+  .lightbox__nav-group {
+    gap: 0.5rem;
   }
 
-  .lightbox__close {
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
+  .lightbox__content {
+    max-height: min(70vh, calc(100svh - 12rem));
+    margin: 0.75rem 0;
+    min-height: 0;
+  }
+
+  .lightbox__controls {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .lightbox__btn {
+    padding: 0.65rem 0.9rem;
   }
 
   /* Hero adjustments */
@@ -2854,9 +2878,10 @@ html {
   }
 
   /* CTA buttons */
-  .hero__cta {
+  .hero__ctas {
     flex-direction: column;
     gap: 0.75rem;
+    width: min(100%, 24rem);
   }
 
   .cta-btn {
@@ -3018,24 +3043,18 @@ html {
     font-size: 0.85rem;
   }
 
+  .hero__ctas .cta-btn {
+    width: 100%;
+  }
+
   .lightbox__video {
     max-width: 95vw;
-    max-height: 70vh;
+    max-height: min(70vh, calc(100svh - 12rem));
   }
 
   .lightbox__image {
     max-width: 95vw;
-    max-height: 70vh;
-  }
-
-  .lightbox__nav {
-    width: 36px;
-    height: 36px;
-  }
-
-  .lightbox__nav svg {
-    width: 16px;
-    height: 16px;
+    max-height: min(70vh, calc(100svh - 12rem));
   }
 }
 
@@ -3063,11 +3082,11 @@ html {
     font-size: clamp(2rem, 14vw, 3rem);
   }
 
-  .hero__cta {
+  .hero__ctas {
     width: 100%;
   }
 
-  .hero__cta .cta-btn {
+  .hero__ctas .cta-btn {
     width: 100%;
     justify-content: center;
   }

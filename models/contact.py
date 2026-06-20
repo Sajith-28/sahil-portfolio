@@ -26,7 +26,7 @@ class ContactForm(BaseModel):
     email: EmailStr
     service: str
     brief: str
-    created_at: datetime = None  # type: ignore[assignment]
+    created_at: datetime | None = None
 
     def __init__(self, **data):
         super().__init__(**data)
@@ -61,7 +61,7 @@ class ContactForm(BaseModel):
             "example": {
                 "name": "John Doe",
                 "email": "john@example.com",
-                "service": "Video Editing",
+                "service": "Reels Editing",
                 "brief": "I need a 60-second promo video for my startup.",
             }
         }

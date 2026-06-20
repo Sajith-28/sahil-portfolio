@@ -42,6 +42,7 @@ STATIC_CACHE_RULES: list[tuple[str, str]] = [
     (".jpeg",  "public, max-age=604800"),
     (".png",   "public, max-age=604800"),
     (".webp",  "public, max-age=604800"),
+    (".svg",   "public, max-age=604800"),
     (".mp4",   "public, max-age=604800"),
     (".webm",  "public, max-age=604800"),
 ]
